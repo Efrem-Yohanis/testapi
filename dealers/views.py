@@ -1,14 +1,9 @@
 from django.shortcuts import render
-
-# Create your views here.
-# dealers/views.py
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Dealer
 from .serializers import DealerSerializer
-
-
 
 @api_view(['POST'])
 def add_dealer(request):
@@ -25,3 +20,9 @@ def get_dealers(request):
     dealers = Dealer.objects.all()
     serializer = DealerSerializer(dealers, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['DELETE'])
+def delete_all_dealers(request):
+    """Delete all dealers from the database."""
+    Dealer.objects.all().delete()
+    return Response({'message': 'All dealers have been deleted.'}, status=status.HTTP_204_NO_CONTENT)
