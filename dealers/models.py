@@ -1,6 +1,6 @@
 from django.db import models
 
-class Dealer(models.Model):
+class Dealer1(models.Model):
     # Auto-generated unique identifier for the record
     id = models.AutoField(primary_key=True)
     # Event type (insert or update)
@@ -14,7 +14,7 @@ class Dealer(models.Model):
     # User's last name
     last_name = models.CharField(max_length=100)
     # Status of the record, active or inactive
-    status = models.CharField(max_length=20, choices=[('active', 'Active'), ('inactive', 'Inactive')], default="active")
+    status = models.BooleanField()
 
     def __str__(self):
         return self.name

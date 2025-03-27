@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Dealer
+from .models import Dealer1
 from .serializers import DealerSerializer
 
 @api_view(['POST'])
@@ -17,14 +17,14 @@ def add_dealer(request):
 @api_view(['GET'])
 def get_dealers(request):
     """Retrieve the list of dealers."""
-    dealers = Dealer.objects.all()
+    dealers = Dealer1.objects.all()
     serializer = DealerSerializer(dealers, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['PUT'])
 def update_dealer(request, dealer_id):
     """Update an existing dealer."""
-    dealer = get_object_or_404(Dealer, DealerId=dealer_id)
+    dealer = get_object_or_404(Dealer1, DealerId=dealer_id)
     serializer = DealerSerializer(dealer, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
@@ -34,5 +34,5 @@ def update_dealer(request, dealer_id):
 @api_view(['DELETE'])
 def delete_all_dealers(request):
     """Delete all dealers from the database."""
-    Dealer.objects.all().delete()
+    Dealer1.objects.all().delete()
     return Response({'message': 'All dealers have been deleted.'}, status=status.HTTP_204_NO_CONTENT)
