@@ -24,7 +24,7 @@ def get_dealers(request):
 @api_view(['PUT'])
 def update_dealer(request, dealer_id):
     """Update an existing dealer."""
-    dealer = get_object_or_404(Dealer1, DealerId=dealer_id)
+    dealer = get_object_or_404(Dealer1, id=dealer_id)
     serializer = DealerSerializer(dealer, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
